@@ -6,7 +6,7 @@ MAINTAINER James Gilliland <neclimdul@gmail.com>
 # enable it as needed.
 #
 # Run docker-php-ext-enable xdebug to enable xdebug
-RUN pecl install xdebug
+RUN pecl install xdebug && rm -rf /tmp/pear
 
 ENTRYPOINT []
 
