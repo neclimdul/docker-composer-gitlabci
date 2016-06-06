@@ -1,0 +1,12 @@
+build_image:
+  image: docker:git
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN git.apqc.org:4567
+    - docker build -t jgilliland/docker-composer-gitlabci .
+    # - docker run my-group/my-project /script/to/run/tests
+    - docker tag jgilliland/docker-composer-gitlabci git.apqc.org:4567/jgilliland/docker-composer-gitlabci:latest
+    - docker push git.apqc.org:4567/jgilliland/docker-composer-gitlabci:latest
+  only:
+    - master
