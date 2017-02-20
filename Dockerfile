@@ -7,7 +7,7 @@ MAINTAINER James Gilliland <neclimdul@gmail.com>
 
 # Install some common testing extensions
 RUN BUILD_DEPS="autoconf g++ make" && \
-  apk -U add $BUILD_DEPS && \
+  apk -U add binutils $BUILD_DEPS && \
   docker-php-ext-install pdo_mysql && \
   pecl install redis && \
   pecl install xdebug && \
