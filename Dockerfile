@@ -6,9 +6,10 @@ MAINTAINER James Gilliland <neclimdul@gmail.com>
 # enable it as needed.
 
 # Install some common testing extensions
-RUN BUILD_DEPS="autoconf g++ make" && \
-  apk -U add binutils $BUILD_DEPS && \
+RUN BUILD_DEPS="autoconf g++ make libmcrypt-dev" && \
+  apk -U add binutils libmcrypt $BUILD_DEPS && \
   docker-php-ext-install pdo_mysql && \
+  docker-php-ext-install mcrypt && \
   pecl install redis && \
   pecl install xdebug && \
   apk del $BUILD_DEPS && \
