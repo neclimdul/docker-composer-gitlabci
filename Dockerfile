@@ -6,9 +6,12 @@ MAINTAINER James Gilliland <neclimdul@gmail.com>
 # enable it as needed.
 
 # Install some common testing extensions
-RUN docker-php-ext-install pdo_mysql && \
+RUN BUILD_DEPS="autoconf g++ make" && \
+  apk -U add $BUILD_DEPS && \
+  docker-php-ext-install pdo_mysql && \
   pecl install redis && \
   pecl install xdebug && \
+  apk del $BUILD_DEPS && \
   rm -rf /tmp/pear
 
 ENTRYPOINT []
