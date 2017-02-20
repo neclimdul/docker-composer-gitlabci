@@ -1,5 +1,5 @@
 # Composer Docker Container
-FROM composer/composer:master
+FROM composer
 MAINTAINER James Gilliland <neclimdul@gmail.com>
 
 # Install pecl but don't enable it so composer can be quick and scripts can
@@ -12,4 +12,3 @@ RUN docker-php-ext-install pdo_mysql && \
   rm -rf /tmp/pear
 
 ENTRYPOINT []
-
