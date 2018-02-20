@@ -9,6 +9,8 @@ MAINTAINER James Gilliland <neclimdul@gmail.com>
 RUN BUILD_DEPS="autoconf g++ make" && \
   apk -U add binutils patch $BUILD_DEPS && \
   docker-php-ext-install pdo_mysql && \
+  && pecl install yaml-2.0.2 \
+  && docker-php-ext-enable yaml \
   pecl install redis && \
   pecl install xdebug && \
   apk del $BUILD_DEPS && \
