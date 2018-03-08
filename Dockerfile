@@ -9,7 +9,7 @@ MAINTAINER James Gilliland <neclimdul@gmail.com>
 RUN apk --no-cache --virtual .build-deps $PHPIZE_DEPS \
     libjpeg-turbo-dev \
     libpng-dev \
-  && apk -U add binutils patch
+  && apk -U add binutils patch \
     libjpeg-turbo \
     libpng \
     yaml
@@ -17,9 +17,9 @@ RUN apk --no-cache --virtual .build-deps $PHPIZE_DEPS \
   && docker-php-ext-install pdo_mysql gd \
   && pecl install yaml-2.0.2 \
   && docker-php-ext-enable yaml \
-  pecl install redis && \
-  pecl install xdebug && \
-  apk del .build-deps && \
-  rm -rf /tmp/pear
+  && pecl install redis \
+  && pecl install xdebug \
+  && apk del .build-deps \
+  && rm -rf /tmp/pear
 
 ENTRYPOINT []
