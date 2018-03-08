@@ -12,7 +12,7 @@ RUN apk --no-cache --virtual .build-deps $PHPIZE_DEPS \
   && apk -U add binutils patch \
     libjpeg-turbo \
     libpng \
-    yaml
+    yaml \
   && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install pdo_mysql gd \
   && pecl install yaml-2.0.2 \
