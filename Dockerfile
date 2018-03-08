@@ -6,9 +6,10 @@ MAINTAINER James Gilliland <neclimdul@gmail.com>
 # enable it as needed.
 
 # Install some common testing extensions
-RUN apk --no-cache --virtual .build-deps $PHPIZE_DEPS \
+RUN apk --no-cache --virtual .build-deps add $PHPIZE_DEPS \
     libjpeg-turbo-dev \
     libpng-dev \
+    yaml-dev \
   && apk -U add binutils patch \
     libjpeg-turbo \
     libpng \
