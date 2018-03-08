@@ -6,14 +6,20 @@ MAINTAINER James Gilliland <neclimdul@gmail.com>
 # enable it as needed.
 
 # Install some common testing extensions
-RUN BUILD_DEPS="autoconf g++ make" && \
-  apk -U add binutils patch $BUILD_DEPS && \
-  docker-php-ext-install pdo_mysql && \
+RUN apk --no-cache --virtual .build-deps $PHPIZE_DEPS
+    libjpeg-turbo-dev \
+    libpng-dev \
+  && apk -U add binutils patch
+    libjpeg-turbo \
+    libpng \
+    yaml
+  && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
+  && docker-php-ext-install pdo_mysql gd \
   && pecl install yaml-2.0.2 \
   && docker-php-ext-enable yaml \
   pecl install redis && \
   pecl install xdebug && \
-  apk del $BUILD_DEPS && \
+  apk del .build-deps && \
   rm -rf /tmp/pear
 
 ENTRYPOINT []
